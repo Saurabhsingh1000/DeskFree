@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+enum RoomType {
+  QUIET_ROOM
+  GROUP_ROOM
+  OPEN_SEATING
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         Role      @default(STUDENT)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  bookings     Booking[]
+
+  @@map("users")
+}
+
+model Room {
+  id        String   @id @default(cuid())
+  name      String
+  floor     Int
+  capacity  Int
+  type      RoomType
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  seats     Seat[]
+
+  @@map("rooms")
+}
+
+model Seat {
+  id         String    @id @default(cuid())
+  roomId     String
+  seatNumber String
+  isActive   Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  room       Room      @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  bookings   Booking[]
+
+  @@unique([roomId, seatNumber])
+  @@map("seats")
+}
+
+model Booking {
+  id        String        @id @default(cuid())
+  seatId    String
+  userId    String
+  startTime DateTime
+  endTime   DateTime
+  status    BookingStatus @default(CONFIRMED)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  seat      Seat          @relation(fields: [seatId], references: [id], onDelete: Cascade)
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("bookings")
+}

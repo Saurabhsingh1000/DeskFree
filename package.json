@@ -1,0 +1,28 @@
+{
+  "name": "deskfree-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DeskFree - Real-Time Library & Study Room Seat Booking System",
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:backend": "npm --prefix backend run build",
+    "build:frontend": "npm --prefix frontend run build",
+    "test:backend": "npm --prefix backend run test",
+    "db:up": "docker-compose up -d postgres",
+    "db:migrate": "npm --prefix backend run prisma:migrate",
+    "db:seed": "npm --prefix backend run prisma:seed"
+  },
+  "keywords": [
+    "deskfree",
+    "seat-booking",
+    "realtime",
+    "socketio",
+    "prisma",
+    "postgresql",
+    "react",
+    "vite"
+  ],
+  "author": "",
+  "license": "ISC"
+}

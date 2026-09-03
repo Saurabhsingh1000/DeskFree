@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #0f0f1a;
+    color: #f8f8ff;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #13131f;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #4338ca;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6366f1;
+  }
+}
+
+@layer components {
+  /* Glass card */
+  .glass-card {
+    @apply bg-surface-700/60 backdrop-blur-xl border border-white/5 rounded-2xl;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:border-brand-500/30 hover:shadow-lg hover:shadow-brand-500/10 hover:-translate-y-0.5;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-400 to-purple-400 bg-clip-text text-transparent;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl 
+           transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed 
+           disabled:active:scale-100 shadow-lg shadow-brand-600/20;
+  }
+
+  .btn-secondary {
+    @apply px-5 py-2.5 bg-surface-500 hover:bg-surface-400 border border-white/10 text-white 
+           font-semibold rounded-xl transition-all duration-200 active:scale-95 
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply px-5 py-2.5 bg-red-600/80 hover:bg-red-500 text-white font-semibold rounded-xl 
+           transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-gray-400 hover:text-white hover:bg-surface-500/50 rounded-xl 
+           transition-all duration-200 active:scale-95;
+  }
+
+  /* Input */
+  .input-field {
+    @apply w-full px-4 py-3 bg-surface-600/80 border border-white/10 rounded-xl text-white 
+           placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500/50 
+           focus:border-brand-500/50 transition-all duration-200;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold;
+  }
+
+  .badge-available {
+    @apply badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/20;
+  }
+
+  .badge-booked {
+    @apply badge bg-red-500/15 text-red-400 border border-red-500/20;
+  }
+
+  .badge-maintenance {
+    @apply badge bg-amber-500/15 text-amber-400 border border-amber-500/20;
+  }
+
+  /* Seat grid */
+  .seat-btn {
+    @apply relative flex items-center justify-center rounded-lg font-mono text-xs font-bold 
+           transition-all duration-200 cursor-pointer select-none border;
+    aspect-ratio: 1;
+  }
+
+  .seat-available {
+    @apply seat-btn bg-emerald-500/10 border-emerald-500/30 text-emerald-400 
+           hover:bg-emerald-500/20 hover:border-emerald-400 hover:scale-105 hover:shadow-lg 
+           hover:shadow-emerald-500/20 active:scale-95;
+  }
+
+  .seat-booked {
+    @apply seat-btn bg-red-500/10 border-red-500/20 text-red-500/60 cursor-not-allowed;
+  }
+
+  .seat-maintenance {
+    @apply seat-btn bg-amber-500/10 border-amber-500/20 text-amber-500/60 cursor-not-allowed;
+  }
+
+  .seat-selected {
+    @apply seat-btn bg-brand-500/20 border-brand-400 text-brand-300 scale-105 
+           shadow-lg shadow-brand-500/30 animate-pulse-glow;
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    @apply bg-surface-500/50 animate-pulse rounded-xl;
+  }
+
+  /* Page header */
+  .page-title {
+    @apply text-3xl font-bold text-white;
+  }
+
+  /* Section title */
+  .section-title {
+    @apply text-lg font-semibold text-white;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0.5rem);
+  }
+}
+
