@@ -5,6 +5,7 @@
   "description": "DeskFree - Real-Time Library & Study Room Seat Booking System",
   "scripts": {
     "build": "npm --prefix frontend install && npm --prefix frontend run build",
+    "start": "npx serve -s frontend/dist -l ${PORT:-3000}",
     "dev": "npm --prefix frontend run dev",
     "dev:backend": "npm --prefix backend run dev",
     "dev:frontend": "npm --prefix frontend run dev",
@@ -14,6 +15,9 @@
     "db:up": "docker-compose up -d postgres",
     "db:migrate": "npm --prefix backend run prisma:migrate",
     "db:seed": "npm --prefix backend run prisma:seed"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
   },
   "keywords": [
     "deskfree",
