@@ -53,10 +53,18 @@ initSocket(httpServer);
 const PORT = parseInt(process.env.PORT ?? '3001', 10);
 
 if (process.env.NODE_ENV !== 'test') {
-  httpServer.listen(PORT, () => {
+  httpServer.listen(PORT, async () => {
     console.log(`🚀 DeskFree backend running on http://localhost:${PORT}`);
     console.log(`📡 Socket.io enabled`);
     console.log(`🌍 CORS allowed for: ${process.env.FRONTEND_URL ?? 'http://localhost:5173'}`);
+
+    try {
+      const { autoSeedDatabase } = await import('./lib/seedHelper');
+      const prisma = (await import('./lib/prisma')).default;
+      await autoSeedDatabase(prisma);
+    } catch (err) {
+      console.warn('Auto-seed check note:', err);
+    }
   });
 }
 

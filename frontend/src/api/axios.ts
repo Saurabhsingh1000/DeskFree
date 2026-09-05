@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import type { ApiError } from '../types';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: import.meta.env.VITE_API_URL || (import.meta.env.PROD ? 'https://deskfree-1.onrender.com/api' : '/api'),
   headers: { 'Content-Type': 'application/json' },
 });
 

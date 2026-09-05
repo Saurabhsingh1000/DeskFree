@@ -7,7 +7,7 @@ let socketInstance: Socket | null = null;
 
 function getSocket(token: string | null): Socket {
   if (!socketInstance || !socketInstance.connected) {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || (typeof window !== 'undefined' ? window.location.origin : '');
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || (import.meta.env.PROD ? 'https://deskfree-1.onrender.com' : (typeof window !== 'undefined' ? window.location.origin : ''));
     socketInstance = io(backendUrl, {
       auth: token ? { token } : undefined,
       transports: ['websocket', 'polling'],
